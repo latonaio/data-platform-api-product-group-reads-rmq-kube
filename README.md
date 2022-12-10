@@ -82,6 +82,41 @@ func (c *DPFMAPICaller) AsyncProductGroupReads(
 以下の項目のうち、"ProductGroup" ～ "ProductGroupName" は、/DPFM_API_Output_Formatter/type.go 内 の Type ProductGroup {} による出力結果です。"cursor" ～ "time"は、golang-logging-library による 定型フォーマットの出力結果です。  
 
 ```
-XXX
+{
+    "connection_key": "request",
+    "result": true,
+    "redis_key": "abcdefg",
+    "filepath": "/var/lib/aion/Data/rededge_sdc/abcdef.json",
+    "api_status_code": 200,
+    "runtime_session_id": "cc9a6f79c6ad4665be140ce25da32560",
+    "business_partner": null,
+    "service_label": "PRODUCT_GROUP",
+    "api_type": "reads",
+    "message": {
+        "ProductGroup": {
+            "ProductGroup": "01"
+        },
+        "ProductGroupText": {
+            "ProductGroup": "01",
+            "Language": "JA",
+            "ProductGroupName": "菓子パン"
+        }
+    },
+    "api_schema": "DPFMProductGroupReads",
+    "accepter": [
+        "ProductGroup",
+        "ProductGroupText"
+    ],
+    "deleted": false,
+    "sql_update_result": null,
+    "sql_update_error": "",
+    "subfunc_result": null,
+    "subfunc_error": "",
+    "exconf_result": null,
+    "exconf_error": "",
+    "api_processing_result": true,
+    "api_processing_error": ""
+}
+
 ```
 
