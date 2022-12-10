@@ -1,0 +1,22 @@
+{
+	"connection_key": "request",
+	"result": true,
+	"redis_key": "abcdefg",
+	"filepath": "/var/lib/aion/Data/rededge_sdc/abcdef.json",
+	"api_status_code": 200,
+	"runtime_session_id": "boi9ar543dg91ipdnspi099u231280ab0v8af0ew",
+	"business_partner": null,
+	"service_label": "PRODUCT_GROUP",
+	"api_type": "",
+	"ProductGroup": {
+		"ProductGroup": "01",
+		"ProductGroupText" :{
+			"Language": "JA",
+			"ProductGroupName": ""
+		}
+	},
+	"api_schema": "DPFMProductGroupReads",
+	"accepter": ["ProductGroup", "ProductGroupText"],
+	"product_group": "",
+	"deleted": false
+}
