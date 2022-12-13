@@ -45,7 +45,7 @@ type ProductGroup struct {
 }
 
 type ProductGroupText struct {
-	ProductGroup     string `json:"ProductGroup"`
-	Language         string `json:"Language"`
-	ProductGroupName string `json:"ProductGroupName"`
+	ProductGroup     string  `json:"ProductGroup"`
+	Language         string  `json:"Language"`
+	ProductGroupName *string `json:"ProductGroupName"`
 }
