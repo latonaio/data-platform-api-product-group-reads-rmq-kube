@@ -25,8 +25,8 @@ type SDC struct {
 }
 
 type Message struct {
-	ProductGroup     *ProductGroup     `json:"ProductGroup"`
-	ProductGroupText *ProductGroupText `json:"ProductGroupText"`
+	ProductGroup     *[]ProductGroup     `json:"ProductGroup"`
+	ProductGroupText *[]ProductGroupText `json:"ProductGroupText"`
 }
 
 type ProductGroupReads struct {

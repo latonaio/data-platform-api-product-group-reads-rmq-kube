@@ -7,17 +7,15 @@ import (
 	"fmt"
 )
 
-func ConvertToProductGroup(sdc *api_input_reader.SDC, rows *sql.Rows) (*ProductGroup, error) {
-	pm := &requests.ProductGroup{}
+func ConvertToProductGroup(sdc *api_input_reader.SDC, rows *sql.Rows) (*[]ProductGroup, error) {
+	defer rows.Close()
+	productGroup := make([]ProductGroup, 0)
 
-	for i := 0; true; i++ {
-		if !rows.Next() {
-			if i == 0 {
-				return nil, fmt.Errorf("DBに対象のレコードが存在しません。")
-			} else {
-				break
-			}
-		}
+	i := 0
+	for rows.Next() {
+		i++
+		pm := &requests.ProductGroup{}
+
 		err := rows.Scan(
 			&pm.ProductGroup,
 		)
@@ -25,26 +23,26 @@ func ConvertToProductGroup(sdc *api_input_reader.SDC, rows *sql.Rows) (*ProductG
 			fmt.Printf("err = %+v \n", err)
 			return nil, err
 		}
+		data := pm
+		productGroup = append(productGroup, ProductGroup{
+			ProductGroup: data.ProductGroup,
+		})
 	}
-	data := pm
+	if i == 0 {
+		return nil, fmt.Errorf("DBに対象のレコードが存在しません。")
+	}
 
-	productGroup := &ProductGroup{
-		ProductGroup: data.ProductGroup,
-	}
-	return productGroup, nil
+	return &productGroup, nil
 }
 
-func ConvertToProductGroupText(sdc *api_input_reader.SDC, rows *sql.Rows) (*ProductGroupText, error) {
-	pm := &requests.ProductGroupText{}
+func ConvertToProductGroupText(sdc *api_input_reader.SDC, rows *sql.Rows) (*[]ProductGroupText, error) {
+	defer rows.Close()
+	productGroupText := make([]ProductGroupText, 0)
 
-	for i := 0; true; i++ {
-		if !rows.Next() {
-			if i == 0 {
-				return nil, fmt.Errorf("DBに対象のレコードが存在しません。")
-			} else {
-				break
-			}
-		}
+	i := 0
+	for rows.Next() {
+		i++
+		pm := &requests.ProductGroupText{}
 		err := rows.Scan(
 			&pm.ProductGroup,
 			&pm.Language,
@@ -54,13 +52,17 @@ func ConvertToProductGroupText(sdc *api_input_reader.SDC, rows *sql.Rows) (*Prod
 			fmt.Printf("err = %+v \n", err)
 			return nil, err
 		}
-	}
-	data := pm
+		data := pm
+		productGroupText = append(productGroupText, ProductGroupText{
+			ProductGroup:     data.ProductGroup,
+			Language:         data.Language,
+			ProductGroupName: data.ProductGroupName,
+		})
 
-	productGroupText := &ProductGroupText{
-		ProductGroup:     data.ProductGroup,
-		Language:         data.Language,
-		ProductGroupName: data.ProductGroupName,
 	}
-	return productGroupText, nil
+	if i == 0 {
+		return nil, fmt.Errorf("DBに対象のレコードが存在しません。")
+	}
+
+	return &productGroupText, nil
 }
