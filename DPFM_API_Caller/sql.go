@@ -29,7 +29,7 @@ func (c *DPFMAPICaller) readSqlProcess(
 			}()
 		case "ProductGroups":
 			func() {
-				productGroup = c.ProductGroup(mtx, input, output, errs, log)
+				productGroup = c.ProductGroups(mtx, input, output, errs, log)
 			}()
 		case "ProductGroupText":
 			func() {
@@ -58,12 +58,16 @@ func (c *DPFMAPICaller) ProductGroup(
 	errs *[]error,
 	log *logger.Logger,
 ) *[]dpfm_api_output_formatter.ProductGroup {
-	productGroup := input.ProductGroup[0].ProductGroup
+	where := fmt.Sprintf("WHERE ProductGroup = '%s'", input.ProductGroup.ProductGroup)
+
+	if input.ProductGroup.IsMarkedForDeletion != nil {
+		where = fmt.Sprintf("%s\nAND IsMarkedForDeletion = %v", where, *input.ProductGroup.IsMarkedForDeletion)
+	}
 
 	rows, err := c.db.Query(
-		`SELECT ProductGroup
+		`SELECT *
 		FROM DataPlatformMastersAndTransactionsMysqlKube.data_platform_product_group_product_group_data
-		WHERE ProductGroup = ?;`, productGroup,
+		` + where + ` ORDER BY IsMarkedForDeletion ASC, ProductGroup DESC;`,
 	)
 	if err != nil {
 		*errs = append(*errs, err)
@@ -85,10 +89,15 @@ func (c *DPFMAPICaller) ProductGroups(
 	errs *[]error,
 	log *logger.Logger,
 ) *[]dpfm_api_output_formatter.ProductGroup {
+
+	if input.ProductGroup.IsMarkedForDeletion != nil {
+		where = fmt.Sprintf("%s\nAND IsMarkedForDeletion = %v", where, *input.ProductGroup.IsMarkedForDeletion)
+	}
+
 	rows, err := c.db.Query(
-		`SELECT ProductGroup
+		`SELECT *
 		FROM DataPlatformMastersAndTransactionsMysqlKube.data_platform_product_group_product_group_data
-		;`,
+		` + where + ` ORDER BY IsMarkedForDeletion ASC, ProductGroup DESC;`,
 	)
 	if err != nil {
 		*errs = append(*errs, err)

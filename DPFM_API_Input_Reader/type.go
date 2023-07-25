@@ -70,12 +70,18 @@ type SDC struct {
 }
 
 type ProductGroup struct {
-	ProductGroup     string           `json:"ProductGroup"`
-	ProductGroupText ProductGroupText `json:"ProductGroupText"`
+	ProductGroup		string	`json:"ProductGroup"`
+	CreationDate		*string	`json:"CreationDate"`
+	LastChangeDate		*string	`json:"LastChangeDate"`
+	IsMarkedForDeletion	*bool	`json:"IsMarkedForDeletion"`
+	ProductGroupText	[]ProductGroupText `json:"ProductGroupText"`
 }
 
 type ProductGroupText struct {
-	ProductGroup     string  `json:"ProductGroup"`
-	Language         string  `json:"Language"`
-	ProductGroupName *string `json:"ProductGroupName"`
+	ProductGroup     	string  `json:"ProductGroup"`
+	Language         	string  `json:"Language"`
+	ProductGroupName 	*string `json:"ProductGroupName"`
+	CreationDate		*string	`json:"CreationDate"`
+	LastChangeDate		*string	`json:"LastChangeDate"`
+	IsMarkedForDeletion	*bool	`json:"IsMarkedForDeletion"`
 }

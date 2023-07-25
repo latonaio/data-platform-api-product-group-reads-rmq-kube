@@ -18,6 +18,9 @@ func ConvertToProductGroup(sdc *api_input_reader.SDC, rows *sql.Rows) (*[]Produc
 
 		err := rows.Scan(
 			&pm.ProductGroup,
+			&pm.CreationDate,
+			&pm.LastChangeDate,
+			&pm.IsMarkedForDeletion,
 		)
 		if err != nil {
 			fmt.Printf("err = %+v \n", err)
@@ -25,7 +28,10 @@ func ConvertToProductGroup(sdc *api_input_reader.SDC, rows *sql.Rows) (*[]Produc
 		}
 		data := pm
 		productGroup = append(productGroup, ProductGroup{
-			ProductGroup: data.ProductGroup,
+			ProductGroup:			data.ProductGroup,
+			CreationDate:			data.CreationDate,
+			LastChangeDate:			data.LastChangeDate,
+			IsMarkedForDeletion:	data.IsMarkedForDeletion,
 		})
 	}
 	if i == 0 {
@@ -47,6 +53,9 @@ func ConvertToProductGroupText(sdc *api_input_reader.SDC, rows *sql.Rows) (*[]Pr
 			&pm.ProductGroup,
 			&pm.Language,
 			&pm.ProductGroupName,
+			&pm.CreationDate,
+			&pm.LastChangeDate,
+			&pm.IsMarkedForDeletion,
 		)
 		if err != nil {
 			fmt.Printf("err = %+v \n", err)
@@ -54,9 +63,12 @@ func ConvertToProductGroupText(sdc *api_input_reader.SDC, rows *sql.Rows) (*[]Pr
 		}
 		data := pm
 		productGroupText = append(productGroupText, ProductGroupText{
-			ProductGroup:     data.ProductGroup,
-			Language:         data.Language,
-			ProductGroupName: data.ProductGroupName,
+			ProductGroup:     		data.ProductGroup,
+			Language:         		data.Language,
+			ProductGroupName:		data.ProductGroupName,
+			CreationDate:			data.CreationDate,
+			LastChangeDate:			data.LastChangeDate,
+			IsMarkedForDeletion:	data.IsMarkedForDeletion,
 		})
 
 	}

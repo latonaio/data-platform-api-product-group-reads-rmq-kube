@@ -7,16 +7,24 @@
 	"runtime_session_id": "boi9ar543dg91ipdnspi099u231280ab0v8af0ew",
 	"business_partner": null,
 	"service_label": "PRODUCT_GROUP",
-	"api_type": "",
+	"api_type": "reads",
 	"ProductGroup": {
-		"ProductGroup": "01",
-		"ProductGroupText" :{
-			"Language": "JA",
-			"ProductGroupName": ""
-		}
+		"ProductGroup": "",
+		"CreationDate": "",
+		"LastChangeDate": "",
+		"IsMarkedForDeletion": null,
+		"ProductGroupText": [
+			{
+				"Language": "",
+				"ProductGroupName": "",
+				"CreationDate": "",
+				"LastChangeDate": "",
+				"IsMarkedForDeletion": null
+			}
+		]
 	},
 	"api_schema": "DPFMProductGroupReads",
-	"accepter": ["ProductGroup", "ProductGroupText"],
-	"product_group": "",
-	"deleted": false
+	"accepter": [
+		"ProductGroup"
+	]
 }

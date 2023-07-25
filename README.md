@@ -1,7 +1,7 @@
 # data-platform-api-product-group-reads-rmq-kube
 
-data-platform-api-product-group-reads-rmq-kube は、周辺業務システム　を データ連携基盤 と統合することを目的に、API で品目グループデータを登録するマイクロサービスです。  
-https://xxx.xxx.io/api/API_PRODUCT_GROUP_SRV/creates/
+data-platform-api-product-group-reads-rmq-kube は、周辺業務システム　を データ連携基盤 と統合することを目的に、API で品目グループデータを取得するマイクロサービスです。  
+https://xxx.xxx.io/api/API_PRODUCT_GROUP_SRV/reads/
 
 ## 動作環境
 
@@ -20,7 +20,6 @@ data-platform-api-product-group-reads-rmq-kube には、次の API をコール�
 
 * A_ProductGroup（データ連携基盤 品目グループ - 品目グループデータ）
 * A_ProductGroupText（データ連携基盤 品目グループ - 品目グループテキストデータ）
- 
 
 ## API への 値入力条件 の 初期値
 data-platform-api-product-group-reads-rmq-kube において、API への値入力条件の初期値は、入力ファイルレイアウトの種別毎に、次の通りとなっています。  
@@ -38,8 +37,6 @@ accepter において 下記の例のように、データの種別（＝APIの�
 ```
 	"api_schema": "DPFMProductGroupReads",
 	"accepter": ["ProductGroup", "ProductGroupText"],
-	"product_group": "",
-	"deleted": false
 ```
   
 * 全データを取得する際のsample.jsonの記載例(2)  
@@ -49,8 +46,6 @@ accepter において 下記の例のように、データの種別（＝APIの�
 ```
 	"api_schema": "DPFMProductGroupReads",
 	"accepter": ["ProductGroup", "ProductGroupText"],
-	"product_group": "",
-	"deleted": false
 ```
 
 ## 指定されたデータ種別のコール
@@ -59,7 +54,7 @@ accepter における データ種別 の指定に基づいて DPFM_API_Caller �
 caller.go の func() 毎 の 以下の箇所が、指定された API をコールするソースコードです。  
 
 ```
-func (c *DPFMAPICaller) AsyncProductGroupReads(
+func (c *DPFMAPICaller) AsyncReads(
 	accepter []string,
 	input *dpfm_api_input_reader.SDC,
 	output *dpfm_api_output_formatter.SDC,
@@ -119,4 +114,3 @@ func (c *DPFMAPICaller) AsyncProductGroupReads(
 }
 
 ```
-
